@@ -2,6 +2,7 @@ package Teachings;
 
 public class Quicksort {
 	public static int partition(int arr[],int left,int right) {
+		//0. pivot to be chose as left element
 		int pivot=arr[left];
 		int pivotpos=left;
 		//5.we need to run until left is smaller than right
