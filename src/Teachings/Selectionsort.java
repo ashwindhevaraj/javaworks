@@ -5,8 +5,10 @@ public class Selectionsort {
 		int n=a.length;
 		for(int i=0;i<n;i++) {
 			int min=i;
+			//to set first element as minimum element
 			for(int j=i+1;j<n;j++) {
 				if(a[j]<a[min]) {
+					//if element is minimum that position is marked as min here
 					min=j;
 				}
 			}
