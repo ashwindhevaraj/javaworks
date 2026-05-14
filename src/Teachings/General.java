@@ -8,16 +8,16 @@ import java.util.Scanner;
 public class General{
 	public static void main(String args[]) {
 		General g=new General();
-		char a='\u0061';
-		int b=0b1111;
-		int c=01111;
+		char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
+		int b=0b1111; //binary representation
+		int c=01111; //octal representation
 		int d[]= {1,2,3,4,5};
 		int e=10,f=15;
-		System.out.println(a);
-		System.out.println(b);
-		System.out.println(c);
-		System.out.println(d.length);
-		g.arraysum(new int[] {1,2,3,4,5});
+		System.out.println(a); //a
+		System.out.println(b); //15
+		System.out.println(c); //585
+		System.out.println(d.length); //5
+		g.arraysum(new int[] {1,2,3,4,5}); //anonymous array
 		if (++e<10 || ++f>15)
 			e++;
 		else
