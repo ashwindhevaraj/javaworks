@@ -8,7 +8,8 @@ import java.util.Scanner;
 public class General{
 	public static void main(String args[]) {
 		General g=new General();
-		char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
+		g.secondsmallnumber();
+		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
 		int d[]= {1,2,3,4,5};
@@ -39,7 +40,7 @@ public class General{
 		break;
 		default:
 			System.out.println("can you enter correct one");
-	}
+	}*/
 	}
 	public void arraysum(int a[]){
 		int total=0;
@@ -47,5 +48,22 @@ public class General{
 			total+=x;
 		}
 		System.out.println(total);
+	}
+	public void secondsmallnumber() {
+		// below program displays second smallest number in array without sorting
+		int a[]= {5,4,3,1,2};
+		int first=Integer.MAX_VALUE;
+		int second = Integer.MAX_VALUE;
+		for(int i=0;i<a.length;i++) {
+			if(a[i]<first) {
+				second=first;
+				first= a[i];
+			}
+			else if(a[i]<second && a[i]!=second) {
+				second=a[i];
+			}
+			
+		}
+		System.out.println(second);
 	}
 }
