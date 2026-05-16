@@ -8,7 +8,8 @@ import java.util.Scanner;
 public class General{
 	public static void main(String args[]) {
 		General g=new General();
-		g.secondsmallnumber();
+		//g.secondsmallnumber(); asked on Strategic interview
+		g.stringindexrotate();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -65,5 +66,15 @@ public class General{
 			
 		}
 		System.out.println(second);
+	}
+	public void stringindexrotate() {
+		String s1="ABCD";
+		String s2="BCDA";
+		if(s1.length()==s2.length() && (s1+s1).indexOf(s2)!=-1) { //ABCDABCD have BCDA rotated or found inside
+			System.out.println("Two strings have rotation in it");
+		}
+		else {
+			System.out.println("Strings s2 will not rotate inside s1");
+		}
 	}
 }
