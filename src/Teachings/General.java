@@ -9,7 +9,8 @@ public class General{
 	public static void main(String args[]) {
 		General g=new General();
 		//g.secondsmallnumber(); asked on Strategic interview
-		g.stringindexrotate();
+		//g.stringindexrotate();
+		g.stringregularexp();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -75,6 +76,15 @@ public class General{
 		}
 		else {
 			System.out.println("Strings s2 will not rotate inside s1");
+		}
+	}
+	public void stringregularexp() {
+		String k = "12345";
+		if(k.matches("\\d+")){
+			System.out.println("String only having numbers");
+		}
+		else {
+			System.out.println("String contains other than numbers");
 		}
 	}
 }
