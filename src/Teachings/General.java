@@ -4,13 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class General{
 	public static void main(String args[]) {
 		General g=new General();
 		//g.secondsmallnumber(); asked on Strategic interview
 		//g.stringindexrotate();
-		g.stringregularexp();
+		//g.stringregularexp();
+		g.samenumbergrouping();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -86,5 +91,21 @@ public class General{
 		else {
 			System.out.println("String contains other than numbers");
 		}
+	}
+	public void samenumbergrouping() {
+		int a[]= {4,4,5,4,3,2,1,4,-4};
+		int num;
+		Map<Integer,List<Integer>> b=new LinkedHashMap<>();
+		for(int i=0;i<a.length;i++) {
+			num = Math.abs(a[i]);
+			if(!b.containsKey(num)) {
+				b.put(a[i],new ArrayList<>()); //creating array list under map key 
+			}
+			b.get(num).add(a[i]); //adding value to the arraylist of exact map key
+		}
+		for(List<Integer> l:b.values()) { //b.values give [[4,4,4],[3],[5,5]] 
+			System.out.println(l);
+		}
+		
 	}
 }
