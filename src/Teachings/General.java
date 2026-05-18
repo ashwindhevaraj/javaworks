@@ -99,11 +99,11 @@ public class General{
 		for(int i=0;i<a.length;i++) {
 			num = Math.abs(a[i]);
 			if(!b.containsKey(num)) {
-				b.put(a[i],new ArrayList<>());
+				b.put(a[i],new ArrayList<>()); //creating array list under map key 
 			}
-			b.get(num).add(a[i]);
+			b.get(num).add(a[i]); //adding value to the arraylist of exact map key
 		}
-		for(List<Integer> l:b.values()) {
+		for(List<Integer> l:b.values()) { //b.values give [[4,4,4],[3],[5,5]] 
 			System.out.println(l);
 		}
 		
