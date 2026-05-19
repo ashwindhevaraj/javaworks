@@ -1,0 +1,4 @@
+Java will read this file
+Java will explore this file
+Java will end this file
+Testing purpose we created this
