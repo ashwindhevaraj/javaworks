@@ -1,6 +1,7 @@
 package Teachings;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
@@ -10,12 +11,14 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class General{
-	public static void main(String args[]) {
+	public static void main(String args[]) throws IOException {
 		General g=new General();
 		//g.secondsmallnumber(); asked on Strategic interview
 		//g.stringindexrotate();
 		//g.stringregularexp();
-		g.samenumbergrouping();
+		//g.samenumbergrouping();
+		//g.leaderinarray();
+		g.countcharactersinfile();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -106,6 +109,40 @@ public class General{
 		for(List<Integer> l:b.values()) { //b.values give [[4,4,4],[3],[5,5]] 
 			System.out.println(l);
 		}
+		
+	}
+	public void leaderinarray() {
+		int a[]= {25,10,2,4,1,3};
+		int max=Integer.MIN_VALUE;
+		for(int i=a.length-1;i>=0;i--) {
+			if(a[i]>max) {
+				System.out.println(a[i]);
+				max=a[i];
+			}
+		}
+	}
+	public void countcharactersinfile() throws IOException {
+		int charcount=0;
+		int linecount=0;
+		int wordcount=0;
+		BufferedReader br = null;
+		try {
+			br= new BufferedReader(new FileReader("C:\\Users\\dyens\\git\\javaworks\\src\\Text.txt"));
+		}
+		catch(IOException e) {
+			System.out.println(e);
+		}
+		String line = br.readLine();
+		while(line!=null) {
+			linecount++;
+			String words[]=line.split(" ");
+			wordcount+=words.length;
+			for(String s:words) {
+				charcount+=s.length();
+			}
+			line=br.readLine();
+		} // slash n used for printing data in newline
+		System.out.println("linecount "+linecount+"\n wordcount "+wordcount+"\n charactercount "+charcount);
 		
 	}
 }
