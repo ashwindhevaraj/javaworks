@@ -14,9 +14,9 @@ public class Heapsort {
 			largest=right;
 		}
 		if(largest!=i) {
-			int temp=a[largest];
-			a[largest]=a[i];
-			a[i]=temp;
+			int temp=a[i];
+			a[i]=a[largest];
+			a[largest]=temp;
 			heapify(a,n,largest);
 		}
 	}
@@ -34,7 +34,7 @@ public class Heapsort {
 	public static void main(String args[]) {
 		int a[]= {3,6,5,4,1,2,9,8};
 		int n=a.length;
-		heapsort(a,n-1);
+		heapsort(a,n);
 		System.out.println(Arrays.toString(a));
 	}
 
