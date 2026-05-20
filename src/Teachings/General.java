@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 public class General{
@@ -18,7 +19,8 @@ public class General{
 		//g.stringregularexp();
 		//g.samenumbergrouping();
 		//g.leaderinarray();
-		g.countcharactersinfile();
+		//g.countcharactersinfile();
+		g.paircheck();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -145,4 +147,27 @@ public class General{
 		System.out.println("linecount "+linecount+"\n wordcount "+wordcount+"\n charactercount "+charcount);
 		
 	}
+	public void paircheck() {
+		int a[]= {1,5,7,-1,5};
+		int result = 6;
+		List<Integer> temp;
+		List<List<Integer>> res=new ArrayList<>();
+		for(int i=0;i<a.length;i++) {
+			for(int j=0;j<a.length;j++) {
+				if(a[i]+a[j]==result) {
+					int first= a[i];
+					int second = a[j];
+					temp= new ArrayList<>(Arrays.asList(first,second));
+				if(!res.contains(temp)) {
+					res.add(temp);
+				}
+			}
+		}
+		}
+		for(List<Integer> check:res) {
+			System.out.println(check);
+		}
+		
 }
+}
+
