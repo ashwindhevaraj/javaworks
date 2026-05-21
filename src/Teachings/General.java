@@ -20,7 +20,8 @@ public class General{
 		//g.samenumbergrouping();
 		//g.leaderinarray();
 		//g.countcharactersinfile();
-		g.paircheck();
+		//g.paircheck();
+		g.Stringlowercaseconversion();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -169,5 +170,22 @@ public class General{
 		}
 		
 }
+	public void Stringlowercaseconversion() {
+		String a=" aswin oo ";
+		String d=a.trim();
+		System.out.println(d); // will trim white spaces at start and end only / op aswin oo
+		System.out.println(a.replaceAll("\\s+","")); // this regular expression removes white spaces in all places(aswinoo)
+		char b[]=a.toCharArray();
+		char c[]=new char[b.length];
+		for(int i=0;i<b.length;i++) {
+			if(b[i]>='A' && b[i]<='Z') {
+				c[i]=(char)(b[i]+32);
+			}
+			else if(b[i]>='a' && b[i]<='z') {
+				c[i]=(char)(b[i]-32);
+			}
+		}
+		System.out.println(Arrays.toString(c));
+	}
 }
 
