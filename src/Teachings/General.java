@@ -21,7 +21,8 @@ public class General{
 		//g.leaderinarray();
 		//g.countcharactersinfile();
 		//g.paircheck();
-		g.Stringlowercaseconversion();
+		//g.Stringlowercaseconversion();
+		g.middleindexsum();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -186,6 +187,27 @@ public class General{
 			}
 		}
 		System.out.println(Arrays.toString(c));
+	}
+	public void middleindexsum() {
+		int a[]= {1,7,3,6,5,6};
+		int lsum=0;
+		int rsum=0;
+		int total=0;
+		boolean c=false;
+		for(int b:a) {
+			total+=b;
+		}
+		for(int i=0;i<a.length;i++) {
+			rsum=total-lsum-a[i];
+			if(lsum==rsum) {
+				System.out.println("Found at index "+i);
+				c=true;
+				break;
+			}
+			lsum+=a[i];
+		}
+		if(c==false)
+		System.out.println("equal sum not found among middle index");
 	}
 }
 
