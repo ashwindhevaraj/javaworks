@@ -22,7 +22,8 @@ public class General{
 		//g.countcharactersinfile();
 		//g.paircheck();
 		//g.Stringlowercaseconversion();
-		g.middleindexsum();
+		//g.middleindexsum();
+		g.missingnumbercheck();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -208,6 +209,18 @@ public class General{
 		}
 		if(c==false)
 		System.out.println("equal sum not found among middle index");
+	}
+	public void missingnumbercheck() {
+		int n=7;
+		int a[]= {1,3,5};
+		int count=0;
+		for(int i=0;i<=n;i++) {
+			if(count< a.length && a[count]==i) {
+				count++;
+				continue;
+			}
+			System.out.println(i);
+		}
 	}
 }
 
