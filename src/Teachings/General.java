@@ -25,7 +25,9 @@ public class General{
 		//g.middleindexsum();
 		//g.missingnumbercheck();
 		//g.printingtree();
-		g.arraylistduplicate();
+		//g.arraylistduplicate();
+		//g.ibmquestion();
+		g.sorttechnique1();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -266,5 +268,62 @@ public class General{
 		}
 		System.out.println(k);
 		}
+	public String stringreverse(String k) {
+		String v=new String();
+		int count=k.length()-1;
+		int i=0;
+		char a[]=new char[k.length()];
+		while(count>=0) {
+			a[count]=k.charAt(i++);
+			count--;
+		}
+		return String.valueOf(a);
+		//we can use String f=new String(a) and return this f
+	}
+	public int countoneinstring(String k) {
+		int count=0;
+		for(int i=0;i<k.length();i++) {
+			if(k.charAt(i)=='1') {
+				count++;
+			}
+		}
+		return count;
+	}
+	public List<Integer> listposition(String k) {
+		List <Integer> v=new ArrayList<Integer>();
+		for(int i=0;i<k.length();i++) {
+			if(k.charAt(i)=='1') {
+				v.add(i+1);
+			}
+		}
+		return v;
+	}
+	public void ibmquestion() {
+		int n=37;
+		List<Integer> b=new ArrayList<Integer>();
+		String k=Integer.toBinaryString(n);
+		System.out.println(k);
+		//System.out.println(stringreverse(k));
+		int count=countoneinstring(k);
+		b=listposition(k);
+		b.add(0,count);
+		System.out.println(Arrays.toString(b.toArray()));
+		}
+	public void sorttechnique1() {
+		int s[]= {4,4,3,2,1,5};
+		int temp=0;
+		int n=s.length;
+		for(int i=n-1;i>0;i--)
+        {
+            if(s[i]>s[i/2])
+            {
+                temp=s[i];
+                s[i]=s[i/2];
+                s[i/2]=temp;
+            }
+
+        }
+		System.out.println(Arrays.toString(s));
+	}
 }
 
