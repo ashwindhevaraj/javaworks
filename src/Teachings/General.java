@@ -24,7 +24,8 @@ public class General{
 		//g.Stringlowercaseconversion();
 		//g.middleindexsum();
 		//g.missingnumbercheck();
-		g.printingtree();
+		//g.printingtree();
+		g.arraylistduplicate();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -246,5 +247,24 @@ public class General{
 			System.out.println("");
 		}
 	}
+	public void arraylistduplicate() {
+		List<Integer> l=new ArrayList<Integer>();
+		l.add(1);
+		l.add(2);
+		l.add(3);
+		l.add(4);
+		l.add(1);
+		l.add(2);
+		l.add(5);
+		l.add(4);
+		l.add(2);
+		List<Integer> k=new ArrayList<Integer>();
+		for(Integer v:l) {
+			if(!k.contains(v)) {
+				k.add(v);
+			}
+		}
+		System.out.println(k);
+		}
 }
 
