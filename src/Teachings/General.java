@@ -27,7 +27,8 @@ public class General{
 		//g.printingtree();
 		//g.arraylistduplicate();
 		//g.ibmquestion();
-		g.sorttechnique1();
+		//g.sorttechnique1();
+		g.timeconversion();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -324,6 +325,35 @@ public class General{
 
         }
 		System.out.println(Arrays.toString(s));
+	}
+	public void timeconversion() {
+		String a="12:21:04AM";
+		String b[]=a.split(":");
+		System.out.println(Arrays.toString(b)); //[12,21,04AM]
+		String c=b[b.length-1].substring(2); //gives AM
+		System.out.println(c);
+		int d=0;
+		String e="";
+		if(c.equals("PM")) {
+			if(b[0].equals("12")) {
+				b[0]="12";
+			}
+			else {
+				d=Integer.parseInt(b[0]);
+				d+=12;
+				b[0]=String.valueOf(d);
+			}
+		}
+		else {
+			if(b[0].equals("12")) {
+				b[0]="00";
+			}
+		}
+		//b[b.length-1]=c;
+		for(int i=0;i<b.length;i++) {
+			e+=b[i]+":";
+		}
+		System.out.println(e.substring(0,8)); //00:21:04
 	}
 }
 
