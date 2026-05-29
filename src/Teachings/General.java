@@ -5,10 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class General{
@@ -28,7 +30,8 @@ public class General{
 		//g.arraylistduplicate();
 		//g.ibmquestion();
 		//g.sorttechnique1();
-		g.timeconversion();
+		//g.timeconversion();
+		g.firstnonrepeatingcharacter();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -355,5 +358,23 @@ public class General{
 		}
 		System.out.println(e.substring(0,8)); //00:21:04
 	}
+	public void firstnonrepeatingcharacter() {
+		String a="aaabbbcddef";
+		char b[]=a.toCharArray();
+		Map<Character,Integer> c=new HashMap<>();
+		
+		for(char ch:b) {
+			if(c.get(ch)==null) //i tried adding 1 to null- getting null pointer exception
+				c.put(ch,1);
+			else
+			c.put(ch,c.get(ch)+1);
+		}
+		Set<Character> s=c.keySet();
+		for(char d:s) {
+			if(c.get(d)==1) {
+				System.out.println("first non repeating character"+d);
+			}
+		}
+		}
 }
 
