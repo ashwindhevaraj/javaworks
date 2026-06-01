@@ -31,7 +31,8 @@ public class General{
 		//g.ibmquestion();
 		//g.sorttechnique1();
 		//g.timeconversion();
-		g.firstnonrepeatingcharacter();
+		//g.firstnonrepeatingcharacter();
+		g.duplicateinname();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -376,5 +377,22 @@ public class General{
 			}
 		}
 		}
+	public void duplicateinname() {
+		String s="aaabbbcd";
+		char b[]=s.toCharArray();
+		Map<Character,Integer> c=new HashMap<Character,Integer>();
+		for(int i=0;i<b.length;i++) {
+			if(c.containsKey(b[i])) {
+				c.put(b[i],c.get(b[i])+1);
+			}
+			else {
+				c.put(b[i],1);
+			}
+		}
+		for(Map.Entry<Character,Integer> k:c.entrySet()) {
+			if(k.getValue()>1)
+			System.out.println(k.getKey()+"..."+k.getValue());
+		}
+	}
 }
 
