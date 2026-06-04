@@ -54,7 +54,7 @@ public class Idfcprogram {
 		char b[]=d.toCharArray();
 		boolean c=bracketcheck(d);
 		System.out.println("Brakcets are processed now "+ c);
-		boolean e=polynomialcheck(a);
+		boolean e=polynomialcheck(a);  //aaadds will be output
 		System.out.println("wordings are processed now "+ e);
 	}
 	
