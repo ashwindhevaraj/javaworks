@@ -32,7 +32,8 @@ public class General{
 		//g.sorttechnique1();
 		//g.timeconversion();
 		//g.firstnonrepeatingcharacter();
-		g.duplicateinname();
+		//g.duplicateinname();
+		g.maxrepeatnumber();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -393,6 +394,25 @@ public class General{
 			if(k.getValue()>1)
 			System.out.println(k.getKey()+"..."+k.getValue());
 		}
+	}
+	public void maxrepeatnumber() {
+		int a[]= {1,1,2,3,4,5,6,1,2,3};
+		int n=a.length;
+		int max=0;
+		int pos=0;
+		int count[]=new int[a.length];
+		for(int c:a) {
+			count[c]++;
+		}
+		for(int i=0;i<n;i++) {
+			if(count[i]==0)
+				continue;
+			else if(max<count[i]) {
+				max=count[i];
+				pos=i;
+			}
+		}
+		System.out.println(pos+" has repeated "+max+" times here ");
 	}
 }
 
