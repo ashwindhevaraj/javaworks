@@ -33,7 +33,9 @@ public class General{
 		//g.timeconversion();
 		//g.firstnonrepeatingcharacter();
 		//g.duplicateinname();
-		g.maxrepeatnumber();
+		//g.maxrepeatnumber();
+		//g.noofrotations_insortedarray();
+		g.pairscount();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -413,6 +415,57 @@ public class General{
 			}
 		}
 		System.out.println(pos+" has repeated "+max+" times here ");
+	}
+	public boolean sortcheck(int arr[],int n) {
+		if(n==1||n==0)
+			return true;
+		else
+			return arr[n-1]>arr[n-2] && sortcheck(arr,n-1);
+		
+	}
+	public void noofrotations_insortedarray() {
+		int a[]= {15,2,3,6,8,12};
+		int rotate=a.length;
+		int fix[]=new int[a.length];
+		while(rotate>0) {
+			if(sortcheck(fix,fix.length)!=true) {
+				rotate-=1;
+				for(int i=0;i<a.length;i++) {
+					fix[(rotate+i)%a.length]=a[i];
+				}
+				System.out.println(Arrays.toString(fix)); //[2, 3, 6, 8, 12, 15] first time
+				
+			}
+			else {
+				System.out.println((rotate+2)%a.length); //ans is 1- first time shift itself got ascending order
+				break;
+			}
+		}
+		
+	}
+	public void pairscount() {
+		int[] k= {1,2,1,2,3,4,1,1,2,3};
+		int n=k.length;
+		int count=0;
+		Map<Integer,Integer> a=new HashMap<Integer,Integer>();
+		for(int i=0;i<n;i++) {
+			if(a.containsKey(k[i])) {
+				a.put(k[i],a.get(k[i])+1);
+			}
+			else {
+				a.put(k[i],1);
+			}
+		}
+		System.out.println(a); //{1=4, 2=3, 3=2, 4=1}
+		for(Integer c:a.values()) {
+			while(c>1) {
+				c=(c)/2;
+				count++;
+			}
+		}
+		System.out.println(count); //4
+		
+		
 	}
 }
 
