@@ -35,7 +35,8 @@ public class General{
 		//g.duplicateinname();
 		//g.maxrepeatnumber();
 		//g.noofrotations_insortedarray();
-		g.pairscount();
+		//g.pairscount();
+		g.arrivaldeparture();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -464,8 +465,28 @@ public class General{
 			}
 		}
 		System.out.println(count); //4
-		
-		
+	}
+	public void arrivaldeparture() {
+		int arr[] = {900, 940, 950, 1100, 1500, 1800}; //denotes time of arrival
+		int dep[] = {910, 1200, 1120, 1130, 1900, 2000}; //denotes time of departure
+		int platform=1;
+		int maxplatform=1;
+		Arrays.sort(arr);
+		Arrays.sort(dep);
+		int n=arr.length;
+		int i=1,j=0;
+		while(i<n && j<n) {
+			if(arr[i]<=dep[j]) {
+				platform++;
+				i++;
+			}
+			else {
+				platform--;
+				j++;
+			}
+			maxplatform = Math.max(platform,maxplatform);
+		}
+		System.out.println("maxplatform needed is "+maxplatform);
 	}
 }
 
