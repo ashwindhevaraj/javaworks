@@ -1,6 +1,23 @@
 package Teachings;
 
+import java.util.Arrays;
+
 public class Hackerrankchecks {
+	public static void chocolateproblem() {
+		int a[]= {12,4,7,9,2,23,25,41,30,40,28,42,30,44,48,43,50}; //denotes no of chocolates
+		int n=a.length;
+		int m=3; //denotes no of students
+		// we need to give output for min difference of first to third student chocolate as min difference
+		//42,43,44 - triplets will give 2 as different-which is small min through any 3 combinations
+		int minlength=Integer.MAX_VALUE;
+		Arrays.sort(a);
+		for(int i=0;i+m-1<n;i++) {
+			if(a[i+m-1]-a[i]<minlength) {
+				minlength=a[i+m-1]-a[i];
+			}
+		}
+		System.out.println(minlength);
+	}
 	public static int updowncountproblem(String a) {
 		int n=a.length();
 		int i=0;
@@ -58,7 +75,8 @@ public static void main(String args[]) {
 	Hackerrankchecks check=new Hackerrankchecks();
 	//int k=pagecountproblem1(9,4);
 	//System.out.println(k);
-	int a=check.updowncountproblem("UDDDUDUU");
-	System.out.println("deep covered "+a);
+	/*int a=check.updowncountproblem("UDDDUDUU");
+	System.out.println("deep covered "+a);*/
+	chocolateproblem();
 	}
 }
