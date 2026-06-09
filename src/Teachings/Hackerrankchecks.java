@@ -1,8 +1,20 @@
 package Teachings;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Hackerrankchecks {
+	public static void outputformatting() {
+		Scanner a=new Scanner(System.in);
+		for(int i=0;i<3;i++) {
+			System.out.println("enter name and rollno with spaces in between");
+			String s1=a.next();
+			int i1=a.nextInt();
+			System.out.printf("%-20s",s1);
+			System.out.printf("%03d%n",i1);
+		}
+		
+	}
 	public static void chocolateproblem() {
 		int a[]= {12,4,7,9,2,23,25,41,30,40,28,42,30,44,48,43,50}; //denotes no of chocolates
 		int n=a.length;
@@ -77,6 +89,7 @@ public static void main(String args[]) {
 	//System.out.println(k);
 	/*int a=check.updowncountproblem("UDDDUDUU");
 	System.out.println("deep covered "+a);*/
-	chocolateproblem();
+	//chocolateproblem();
+	outputformatting();
 	}
 }
