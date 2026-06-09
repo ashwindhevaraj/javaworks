@@ -36,7 +36,8 @@ public class General{
 		//g.maxrepeatnumber();
 		//g.noofrotations_insortedarray();
 		//g.pairscount();
-		g.arrivaldeparture();
+		//g.arrivaldeparture();
+		g.reversewordinsentence();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -487,6 +488,25 @@ public class General{
 			maxplatform = Math.max(platform,maxplatform);
 		}
 		System.out.println("maxplatform needed is "+maxplatform);
+	}
+	public String reverseword(String a) {
+		char b[]=a.toCharArray();
+		char c[]=new char[b.length];
+		String d="";
+		for(int i=0;i<b.length;i++) {
+			d+=b[a.length()-i-1];
+		}
+		return d;
+	}
+	public void reversewordinsentence() {
+		String a="HI how are you";
+		String b[]=a.split(" ");
+		String d[]=new String[b.length];
+		int count=0;
+		for(String c:b) {
+			d[count++]=reverseword(c);
+		}
+		System.out.println(Arrays.toString(d));
 	}
 }
 
