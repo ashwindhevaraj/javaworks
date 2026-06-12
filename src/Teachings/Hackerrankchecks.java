@@ -1,7 +1,11 @@
 package Teachings;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Hackerrankchecks {
 	public static void outputformatting() {
@@ -83,6 +87,116 @@ public class Hackerrankchecks {
 		}
 		return 0;
 	}
+	public static void coderabbitques1() {
+		//if input 234aabdds47- it should return true
+		//as 2 and 34 being consecutive even numbers
+		//if input 21beess214- it should return true
+		String s="234aabdds";
+		Pattern p= Pattern.compile("[0-9]+");
+		Matcher m=p.matcher(s);
+		boolean flag=false;
+		while(m.find()) {
+			String b=m.group();
+			int n=b.length();
+			if(n==2)
+			flag=checknumbertwo(b);
+			else if(n>2)
+				flag=checknumberthree(b);
+		}
+		if(flag==true)
+			System.out.println("Valid");
+		else
+			System.out.println("Invalid");
+		
+	}
+	public static boolean checknumbertwo(String a) {
+		char b[]=a.toCharArray();
+		Integer c=Integer.parseInt(String.valueOf(b[0]));
+		Integer d=Integer.parseInt(String.valueOf(b[1]));
+		if(b.length<=1)
+			return false;
+		else if(b.length==2) {
+			if(c%2!=0)
+				return false;
+				else
+					if(d%2!=0)
+						return false;
+						else
+							return true;
+		}
+		return false;
+	}
+	public static boolean checknumberthree(String a) {
+		String b=a.substring(0,1);
+		String c=a.substring(1);
+		Integer d=Integer.parseInt(b);
+		Integer e=Integer.parseInt(c);
+		if(d%2==0 && e%2==0)
+			return true;
+		else
+			return false;
+	}
+	/*public static String convertstringtonum(String s,Map<String,String> m) {
+		StringBuilder a=new StringBuilder();
+		
+		while(!s.isEmpty()) {
+			for(String word:m.keySet()) {
+				if(s.startsWith(word)) {
+					a.append(m.get(word));
+					s=s.substring(word.length());
+					break;
+				}
+			}
+		}
+		return a.toString();
+	}*/
+	public static int expressioneval(String e) {
+		int num=0;
+		int result=0;
+		char sign='+';
+		for(int i=0;i<e.length();i++) {
+			if(i<e.length() && Character.isDigit(e.charAt(i))) {
+				num=num*10+(e.charAt(i)-'0');
+			}
+			else
+			{
+				if(sign=='+') {
+					result+=num;
+				}
+				else if(sign=='-')
+					result-=num;
+				if(i<e.length()) {
+					sign=e.charAt(i);
+				}
+				num=0;
+			}
+			
+		}
+		return result;
+	}
+	public static void coderabbitques2() {
+		String s="fourfourminustwoplustwozero";
+		Map<String,String> m=new HashMap<String,String>();
+		m.put("zero","0");
+		m.put("one","1");
+		m.put("two","2");
+		m.put("three","3");
+		m.put("four","4");
+		m.put("five","5");
+		m.put("six","6");
+		m.put("seven","7");
+		m.put("eight","8");
+		m.put("nine","9");
+		for(Map.Entry<String,String> e: m.entrySet()) {
+			s=s.replace(e.getKey(), e.getValue());
+		}
+		s=s.replace("minus","-");
+		s=s.replace("plus", "+");
+		System.out.println(s); //"44-2+20"
+		int result=expressioneval(s);
+		System.out.println(result);
+	}
+	//String a=convertstringtonum(s,m);
 public static void main(String args[]) {
 	Hackerrankchecks check=new Hackerrankchecks();
 	//int k=pagecountproblem1(9,4);
@@ -90,6 +204,8 @@ public static void main(String args[]) {
 	/*int a=check.updowncountproblem("UDDDUDUU");
 	System.out.println("deep covered "+a);*/
 	//chocolateproblem();
-	outputformatting();
+	//outputformatting();
+	//coderabbitques1();
+	coderabbitques2();
 	}
 }
