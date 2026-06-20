@@ -1,5 +1,7 @@
 package Interviewprograms;
 
+import java.util.Arrays;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 // to count brackets closure and opening 
@@ -47,15 +49,50 @@ public class Idfcprogram {
 			return true;
 		}
 	}
+	public static boolean stacklogic(String a) {
+		Stack<Character> b=new Stack<Character>();
+		for(Character c:a.toCharArray()) {
+			System.out.println(c);
+			if(c=='('||c=='{'||c=='[') {
+				b.push(c);
+			}
+			else {
+				if(b.isEmpty())
+					return false;
+				else {
+				switch(c) {
+				case '}':
+					if(b.pop()!='{')
+						return false;
+					break;
+				case ']':
+					if(b.pop()!='[') 
+						return false;
+					break;
+				case ')':
+					if(b.pop()!='(')
+						return false;
+					break;
+					}
+				}
+			}
+		}
+		return b.isEmpty();
+	}
 	public static void main(String args[]) {
 		// program to check paranthesis closed in a way or not
-		String a="({[aaadds}][])";
+		String a="({[aaadds]}[])";
 		String d="[ad[dc][]]";
-		char b[]=d.toCharArray();
-		boolean c=bracketcheck(d);
-		System.out.println("Brakcets are processed now "+ c);
-		boolean e=polynomialcheck(a);  //aaadds will be output
-		System.out.println("wordings are processed now "+ e);
+		//char b[]=d.toCharArray();
+		//boolean c=bracketcheck(d);
+		//System.out.println("Brakcets are processed now "+ c);
+		//boolean e=polynomialcheck(a);  //aaadds will be output
+		//System.out.println("wordings are processed now "+ e);
+		boolean k=stacklogic(a);
+		if(k==true)
+			System.out.println("Balanced");
+		else
+			System.out.println("Not balanced");
 	}
 	
 	
