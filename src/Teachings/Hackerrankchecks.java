@@ -166,7 +166,7 @@ public class Hackerrankchecks {
 				else if(sign=='-')
 					result-=num;
 				if(i<e.length()) {
-					sign=e.charAt(i);
+					sign=e.charAt(i); 
 				}
 				num=0;
 			}
