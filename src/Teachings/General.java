@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 public class General{
@@ -38,7 +39,10 @@ public class General{
 		//g.noofrotations_insortedarray();
 		//g.pairscount();
 		//g.arrivaldeparture();
-		g.reversewordinsentence();
+		//g.reversewordinsentence();
+		//g.movezerostoend();
+		//g.reversearray();
+		g.Deloitteprogram();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -508,6 +512,104 @@ public class General{
 			d[count++]=reverseword(c);
 		}
 		System.out.println(Arrays.toString(d));
+	}
+	public void maxrepeatnumberv2() {
+		String s="assssvvvvv";
+		Map<Character,Integer> check=new HashMap<Character,Integer>();
+		for(int i=0;i<s.length();i++){
+			if(!check.containsKey(s.charAt(i))){
+				check.put(s.charAt(i),1);
+				}
+			else{
+				check.put(s.charAt(i),check.get(s.charAt(i))+1);
+				}
+			}
+		for(Map.Entry k:check.entrySet()){
+			System.out.println(k.getKey()+"  "+k.getValue());
+			}
+		}
+	public void countcharactersv3() {
+		String s="assssvvvvv";
+		Map<Character,Integer> check=new HashMap<Character,Integer>();
+        for(int i=0;i<s.length();i++){
+            check.put(s.charAt(i),check.getOrDefault(s.charAt(i),0)+1);
+        }
+        for(char a:check.keySet()){
+            if(check.get(a)!=1)
+            System.out.println("first non repeating character "+ a +" and times "+check.get(a));
+            else
+            System.out.println("lot of non repeating characters");
+        }
+	}
+	public void movezerostoend() {
+		int a[]={1,2,0,5,4,0,7};
+        int b[]=new int[a.length];
+        int index=0;
+        for(int c:a){
+            if(c!=0)
+            b[index++]=c;
+        }
+        while(index<a.length){
+            b[index++]=0;
+        }
+        System.out.println(Arrays.toString(b));
+	}
+	public void reversearray() {
+		 int a[]={1,2,3,4,5,6};
+	        int k=1;
+	        int n=a.length;
+	        reverserotate(a,0,n-1);
+	        reverserotate(a,0,k-1);
+	        reverserotate(a,k,n-1);
+	        System.out.println(Arrays.toString(a));
+	}
+	public void reverserotate(int a[],int start,int end){
+        int temp=0;
+        while(start<end){
+            temp=a[start];
+            a[start++]=a[end];
+            a[end--]=temp;
+        }
+    }
+	public static void checkwords(String a){
+        Set<Character> k=new HashSet<Character>(Arrays.asList('a','e','i','o','u'));
+        String finals="";
+        char b[]=a.toCharArray();
+        boolean flag=false;
+        int i=0;
+        for(i=0;i<b.length;i++){
+            if(k.contains(b[i]))
+            {
+                finals=a.substring(i);
+                flag=true;
+                break;
+            }
+        }
+        if(flag==true){
+            for(int j=0;j<i;j++){
+                finals+=a.charAt(j);
+            }
+        }
+        else{
+            finals=a;
+        }
+        System.out.println(append(finals));
+    }
+	public static String append(String a){
+        return a+="ay";
+    }
+	public static void Deloitteprogram() {
+		//london ondonlay 
+		//my name is aswin devaraj - input
+		//myay ameay isay aswinay evarajday - output
+		// if vowel encountered - then we need to substring and add the first few characters at beginning and append ay at end
+		
+		String userinput="my name is aswin devaraj";
+        String data[]=userinput.split(" ");
+        for(String s:data){
+            checkwords(s);
+            //append(s);
+        }
 	}
 }
 
