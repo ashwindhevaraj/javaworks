@@ -42,7 +42,8 @@ public class General{
 		//g.reversewordinsentence();
 		//g.movezerostoend();
 		//g.reversearray();
-		g.Deloitteprogram();
+		//g.Deloitteprogram();
+		g.wordcomparison();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -607,9 +608,44 @@ public class General{
 		String userinput="my name is aswin devaraj";
         String data[]=userinput.split(" ");
         for(String s:data){
-            checkwords(s);
+            //checkwords(s); 
             //append(s);
+        	checkwords2(s);
         }
 	}
+	public static void checkwords2(String a) {
+		int i=0;
+		String temp="";
+		boolean flag=false;
+		for(i=0;i<a.length();i++) {
+			if("aeiou".indexOf(a.charAt(i))!=-1) {
+				temp=a.substring(i);
+				flag=true;
+				break;
+			}
+		}
+		if(flag==false) {
+			temp=a+"ay";
+		}
+		else {
+			temp+=a.substring(0,i);
+			temp+="ay";
+		}
+		System.out.println(temp);
+	}
+	public static void wordcomparison() {
+		String a="Java java program";
+		String b[]=a.split(" ");
+		String result="";
+		for(String c:b) {
+			if(result.equalsIgnoreCase(c)) {
+				continue;
+			}
+			else {
+				result+=c;
+				
+			}
+		}
+		System.out.println(result);
+	}
 }
-
