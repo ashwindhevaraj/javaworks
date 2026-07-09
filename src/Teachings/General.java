@@ -43,7 +43,14 @@ public class General{
 		//g.movezerostoend();
 		//g.reversearray();
 		//g.Deloitteprogram();
-		g.wordcomparison();
+		//g.wordcomparison();
+		//g.streamusage();
+		//g.reverseonlystring()
+		//g.slidingwindowmax();
+		//g.numbercount();
+		//g.squarerootcheck();
+		//System.out.println(g.longestpalindrome());
+		g.zigzagprintleetcode();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -648,4 +655,141 @@ public class General{
 		}
 		System.out.println(result);
 	}
+	public static void streamusage() {
+		List<Integer> a=new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
+		a.stream().filter((x)->x%2==0).forEach((p)->System.out.println(p));
+		String s[]= {"ash","Dev","user","boy"};
+		Arrays.stream(s).filter((x)->x.indexOf('a')!=-1).forEach(y->System.out.println(y));
+		}
+	public static void reverseonlystring() {
+		String a="abcd1234defg";
+		char b[]=a.toCharArray();
+		int left=0;
+		int right=a.length()-1;
+		while(left<right) {
+			if(!Character.isAlphabetic(b[left]))
+				left++;
+			else if(!Character.isAlphabetic(b[right]))
+				right--;
+			else {
+				char temp=b[left];
+				b[left]=b[right];
+				b[right]=temp;
+				right--;
+				left++;
+			}
+		}
+		System.out.println(new String(b));
+		}
+	public static void slidingwindowmax() {
+		String a="abcabcdabc";
+		int left=0;
+		int maxlength=0;
+		int start=0;
+		Map<Character,Integer> v=new HashMap<Character,Integer>();
+		for(int right=0;right<a.length();right++) {
+			if(v.containsKey(a.charAt(right))) {
+				left=Math.max(left,(v.get(a.charAt(right))+1));
+			}
+			v.put(a.charAt(right),right);
+			if(right-left+1>maxlength) {
+				maxlength=right-left+1;
+				start=left;
+			}
+		}
+		System.out.println("length of longest substring"+maxlength);
+		System.out.println(a.substring(start,start+maxlength));
+		System.out.println(v);
+	}
+	public void numbercount() {
+		String a="1112223334";
+		int n=Integer.parseInt(a);
+		int freq[]=new int[10];
+		while(n>0) {
+			freq[n%10]++;
+			n=n/10;
+		}
+		for(int i=0;i<freq.length;i++) {
+			if(freq[i]!=0) {
+				System.out.println(i+" repeated "+freq[i]+" times");
+			}
+		}
+	}
+	public void squarerootcheck() {
+		int n=36;
+		int length=n/2;
+		int sum=0;
+		for(int i=1;i<length;i++) {
+			if(i%2==0)
+				continue;
+			else {
+				sum+=i;
+				if(sum==n)
+					break;
+			}
+				
+		}
+		if(sum==n)
+			System.out.println("perfect square");
+		else
+			System.out.println("Not a perfect square");
+	}
+	public String longestpalindrome() {
+		String s="radam";
+		for(int lengths=s.length();lengths>0;lengths--) {
+		for(int start=0;start<=s.length()-lengths;start++) {
+			if(checkpalindrome(start,start+lengths,s)) {
+				return (s.substring(start,start+lengths));
+			}
+				
+		}
+		}
+		return "No palindrome found";
+	}
+	public static boolean checkpalindrome(int left,int right,String s) {
+		while(left<right-1) {
+			if(s.charAt(left)==s.charAt(right-1)) {
+				left++;
+				right--;
+			}
+			else {
+				return false;
+			}
+		}
+		return true;
+	}
+	public void zigzagprintleetcode() {
+		/*Input: s = "PAYPALISHIRING", numRows = 4
+		Output: "PINALSIGYAHRPI"
+		Explanation:
+		P     I    N
+		A   L S  I G
+		Y A   H R
+		P     I*/
+		String s="abcdefghi";
+		int numRows=4;
+        List<Character> rows[]=new ArrayList[numRows];
+        for(int i=0;i<numRows;i++){
+            rows[i]=new ArrayList<>();
+        }
+        int idx=0;
+        int d=1;
+        for(char c:s.toCharArray()){
+            rows[idx].add(c);
+            if(idx==0)
+            d=1;
+            else if(idx==numRows-1)
+            d=-1;
+            idx+=d;
+        }
+        StringBuilder k=new StringBuilder();
+        for(List<Character> v:rows){
+            for(char e:v){
+                k.append(e);
+            }
+        }
+        System.out.println(k.toString());
+        
 }
+}
+ 
