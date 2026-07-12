@@ -50,7 +50,8 @@ public class General{
 		//g.numbercount();
 		//g.squarerootcheck();
 		//System.out.println(g.longestpalindrome());
-		g.zigzagprintleetcode();
+		//g.zigzagprintleetcode();
+		g.twodimensionarraywork();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -789,7 +790,27 @@ public class General{
             }
         }
         System.out.println(k.toString());
-        
+	}
+	public void twodimensionarraywork() {
+		String data[][]= {{"ash","Dev","lias"},{"lia","data","homei"}};
+		Map <Integer,List<String>> r=new HashMap<>();
+		/*for(String temp[]:data) {
+			for(String temp2:temp) {
+				r.computeIfAbsent(temp2.length(),k->new ArrayList()).add(temp2);
+			}
+		}*/
+		//below and above are same codes
+		for(String temp[]:data) {
+			for(String temp2:temp) {
+				if(!r.containsKey(temp2.length())) {
+					r.put(temp2.length(),new ArrayList());
+				}
+				r.get(temp2.length()).add(temp2);
+			}
+		}
+		
+		r.forEach((k,v)->{
+			System.out.println(k+" "+v);
+		});
+	}
 }
-}
- 
