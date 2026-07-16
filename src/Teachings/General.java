@@ -51,7 +51,8 @@ public class General{
 		//g.squarerootcheck();
 		//System.out.println(g.longestpalindrome());
 		//g.zigzagprintleetcode();
-		g.twodimensionarraywork();
+		//g.twodimensionarraywork();
+		g.maxsubarraysum();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -812,5 +813,30 @@ public class General{
 		r.forEach((k,v)->{
 			System.out.println(k+" "+v);
 		});
+	}
+	public void maxsubarraysum() {
+		// kadene algorithm - if currentsum goes negative reset to 0 as it will further reduce future sum
+		int a[]= {-2,1,-3,4,-1,2,1,-5,4};
+		int start=0;
+		int tempstart=0;
+		int end=0;
+		int max=Integer.MIN_VALUE;
+		int currentsum=0;
+		for(int i=0;i<a.length;i++) {
+			currentsum+=a[i];
+			if(currentsum>max) {
+				max=currentsum;
+				end=i;
+				start=tempstart;
+			}
+			if(currentsum<0) {
+				currentsum=0;
+				tempstart=i+1;
+			}
+		}
+		System.out.println(max);
+		for(int i=start;i<=end;i++) {
+			System.out.println(a[i]);
+		}
 	}
 }
