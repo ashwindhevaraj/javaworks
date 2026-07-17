@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 import java.util.Map;
 import java.util.List;
@@ -52,7 +53,8 @@ public class General{
 		//System.out.println(g.longestpalindrome());
 		//g.zigzagprintleetcode();
 		//g.twodimensionarraywork();
-		g.maxsubarraysum();
+		//g.maxsubarraysum();
+		System.out.println(g.longestCommonPrefix(new String[] {"ash","ashs","as"}));
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -839,4 +841,21 @@ public class General{
 			System.out.println(a[i]);
 		}
 	}
+	public static String longestCommonPrefix(String[] strs) {
+        TreeMap<Integer,List<String>> storage=new TreeMap<>();
+        for(String a:strs){
+            storage.computeIfAbsent(a.length(),k-> new ArrayList<>()).add(a);
+        }
+        String first=storage.firstEntry().getValue().get(0);
+        List<String> last1 = storage.lastEntry().getValue();
+        String last=last1.get(last1.size()-1);
+        StringBuilder result=new StringBuilder();
+        for(int i=0;i<Math.min(first.length(),last.length());i++){
+            if(first.charAt(i)!=last.charAt(i)){
+                return result.toString();
+            }
+            result.append(first.charAt(i));
+        }
+        return result.toString();
+    }
 }
