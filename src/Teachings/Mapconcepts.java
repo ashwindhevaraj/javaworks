@@ -1,19 +1,21 @@
 package Teachings;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class Mapconcepts {
 	public static void main(String args[]) {
-	Map<Integer,String> k=new HashMap<Integer,String>();
+	/*Map<Integer,String> k=new HashMap<Integer,String>();
 	k.put(1,"ash");
-	k.put(2,"dev");
+	k.put(2,"dev");*/
 	//System.out.println(k); {1=ash, 2=dev}
-	k.putIfAbsent(2,"cec");
-	k.putIfAbsent(3, "lia");
+	//k.putIfAbsent(2,"cec");
+	//k.putIfAbsent(3, "lia");
 	//System.out.println(k); {1=ash, 2=dev, 3=lia}
 	//System.out.println(k.get(2)); dev\
 	//System.out.println(k.getOrDefault(4,"notfound")); notfound
@@ -74,6 +76,82 @@ public class Mapconcepts {
 		mm.merge(c,1,Integer::sum); get c corresponding value in map and merge with 1
 	}
 	System.out.println(mm); {a=1, s=3, h=1}*/
-	
+		
+		
+	//TreeMap is a NavigableMap implementation that stores entries sorted by key (natural ordering or a custom Comparator).
+		
+		/*TreeMap<Integer,String> tree=new TreeMap<>();
+		tree.put(1,"ash");
+		tree.put(2,"dev");
+		tree.put(3, "user");*/
+		//System.out.println(tree);
+		//put
+		//putIfAbsent
+		//get
+		//getOrDefault
+		//containsKey
+		//containsValue
+		//remove
+		//replace
+		//size
+		//isEmpty
+		//clear
+		//keySet
+		//values
+		//entrySet
+		
+		//Tree specific methods
+		//firstKey()
+		//lastKey()
+		//firstEntry()
+		//lastEntry()
+		//higherKey()- returns next greater key
+		//lowerKey()- returns next lower key
+		//higherEntry()- returns next higher entry
+		//lowerEntry()- returns next lower entry
+		//ceilingKey()- return the key that are greater than or equal to key
+		//floorKey() - return the key that are lowerthan or equal to key
+		//ceilingEntry()-return the entry that are greater than or equal to key
+		//floorEntry()- return the entry that are lowerthan or equal to key
+		//pollFirstEntry()- removes and return the first entry
+		//pollLastEntry()- removes and return the last entry
+		//descendingMap()- display data in descending order based on keys
+		//descendingKeySet()- display key in descending order
+		//headMap()- entries less than specified key displayed
+		//tailMap()- entries greater than or equal to specified key displayed
+		//subMap()- map entries from and to will be fetched
+		
+		
+		/*System.out.println(tree.firstKey()); //1
+		System.out.println(tree.lastKey()); //3
+		System.out.println(tree.firstEntry());//1=ash
+		System.out.println(tree.lastEntry());//3=user
+		System.out.println(tree.higherKey(2)); //3
+		System.out.println(tree.lowerKey(2)); //1
+		System.out.println(tree.higherEntry(2));//3=user
+		System.out.println(tree.lowerEntry(2));//1=ash
+		System.out.println(tree.ceilingKey(2));//2
+		System.out.println(tree.floorKey(2)); //2
+		System.out.println(tree.ceilingEntry(1));//1=ash
+		System.out.println(tree.floorEntry(3));//3=user*/
+		//System.out.println(tree.pollFirstEntry());//1=ash
+		//System.out.println(tree.descendingMap());//{3=user, 2=dev, 1=ash}
+		//System.out.println(tree.descendingKeySet());//[3,2,1]
+		//System.out.println(tree.headMap(2));//1=ash
+		//System.out.println(tree.tailMap(2));//{2=dev, 3=user}
+		//System.out.println(tree.subMap(1,3));//{1=ash,2=dev}
+		TreeMap<Integer,String> tree1=new TreeMap<>(new Comparatorexample());
+		tree1.put(1,"aaa");
+		tree1.put(2,"aab");
+		tree1.put(3, "aac");
+		System.out.println(tree1); //{3=aac, 2=aab, 1=aaa}
+	}
+}
+class Comparatorexample implements Comparator
+{
+	public int compare(Object obj1,Object obj2) {
+		String objs1=obj1.toString();
+		String objs2=obj2.toString();
+		return objs2.compareTo(objs1);
 	}
 }
