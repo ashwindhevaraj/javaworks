@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.LinkedHashMap;
 public class General{
 	public static void main(String args[]) throws IOException {
 		General g=new General();
-		//g.secondsmallnumber(); asked on Strategic interview
+		g.secondsmallnumber(); //asked on Strategic interview
 		//g.stringindexrotate();
 		//g.stringregularexp();
 		//g.samenumbergrouping();
@@ -54,7 +55,11 @@ public class General{
 		//g.zigzagprintleetcode();
 		//g.twodimensionarraywork();
 		//g.maxsubarraysum();
-		System.out.println(g.longestCommonPrefix(new String[] {"ash","ashs","as"}));
+		//System.out.println(g.longestCommonPrefix(new String[] {"ash","ashs","as"}));
+		//g.backtrackingletters("23");
+		//g.backtracking2();
+		//g.tcsinterviewprogram();
+		g.tcsprogram3();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -105,7 +110,7 @@ public class General{
 				second=first;
 				first= a[i];
 			}
-			else if(a[i]<second && a[i]!=second) {
+			else if(a[i]>first && a[i]<second) {
 				second=a[i];
 			}
 			
@@ -858,4 +863,85 @@ public class General{
         }
         return result.toString();
     }
+	public static void backtrackingletters(String digits) {
+        List<String> res=new ArrayList<>();
+        if(digits==null || digits.length()==0)
+        return;
+        StringBuilder comb=new StringBuilder();
+        Map<String,String> data=Map.of("2","abc",
+        "3","def",
+        "4","ghi",
+        "5","jkl",
+        "6","mno",
+        "7","pqrs",
+        "8","tuv",
+        "9","wxyz");
+        backtrack(0,comb,data,digits,res);
+        System.out.println(res);
+    }
+	public static void backtrack(int idx,StringBuilder comb,Map<String,String> data,String digits,List<String> res){
+        if(idx==digits.length()){
+            res.add(comb.toString());
+            return;
+        }
+        String letters=data.get(String.valueOf(digits.charAt(idx)));
+        for(char c:letters.toCharArray()){
+            comb.append(c);
+            backtrack(idx+1,comb,data,digits,res);
+            comb.deleteCharAt(comb.length()-1);
+        }
+    }
+	public static void backtracking2() {
+		List<String> res=new ArrayList<>();
+		String pattern="abc";
+		backtrack2(0,res,new StringBuilder(),pattern);
+		System.out.println(res);
+	}
+	public static void backtrack2(int index,List<String> res,StringBuilder coms,String pattern) {
+		if(coms.length()==pattern.length()) {
+			res.add(coms.toString());
+			return;
+		}
+		for(int i=index;i<pattern.length();i++) {
+			coms.append(pattern.charAt(i));
+			backtrack2(i,res,coms,pattern);
+			coms.deleteCharAt(coms.length()-1);
+		}
+	}
+	public static void tcsinterviewprogram() {
+		// count frequency and print them in descending order
+		String a="aswindevarajan";
+		Map<Character,Integer> data=new HashMap<>();
+		for(int i=0;i<a.length();i++) {
+			data.put(a.charAt(i),data.getOrDefault(a.charAt(i),0)+1);
+		}
+		//convert map to list to get sorted functionality
+		List<Map.Entry<Character,Integer>> list=new ArrayList<>(data.entrySet());
+		list.sort((c,d)->d.getValue()-c.getValue());
+		for(Map.Entry<Character,Integer> l:list) {
+			//System.out.println(l.getKey()+" "+l.getValue());
+			tcsprogram2(l.getValue(),l.getKey());
+		}
+		
+	}
+	public static void tcsprogram2(int n,Character v) {
+		for(int i=0;i<n;i++) {
+			System.out.print(v);
+		}
+	}
+	public static void tcsprogram3() {
+		//above tcs program1 defined using streams here
+		String b="aaabbbbcc";
+        Map<Character,Integer> data=new HashMap<>();
+        for(char a:b.toCharArray()){
+            data.put(a,data.getOrDefault(a,0)+1);
+        }
+        Map<Character,Integer> data1=data.entrySet().stream().sorted(Map.Entry.<Character,Integer>comparingByValue().reversed()).collect(Collectors.toMap(e->e.getKey(),e->e.getValue(),(x,y)->x,LinkedHashMap::new));
+        
+        for(Map.Entry<Character,Integer>data3:data1.entrySet()){
+            for(int i=0;i<data3.getValue();i++){
+                System.out.print(data3.getKey());  //bbbbaaacc
+            }
+        }
+	}
 }

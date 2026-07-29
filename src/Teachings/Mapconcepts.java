@@ -3,10 +3,12 @@ package Teachings;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class Mapconcepts {
 	public static void main(String args[]) {
@@ -81,10 +83,14 @@ public class Mapconcepts {
 	//TreeMap is a NavigableMap implementation that stores entries sorted by key (natural ordering or a custom Comparator).
 		
 		/*TreeMap<Integer,String> tree=new TreeMap<>();
-		tree.put(1,"ash");
-		tree.put(2,"dev");
+		tree.put(2,"ash");
+		tree.put(1,"dev");
 		tree.put(3, "user");*/
 		//System.out.println(tree);
+		// above is by default sort by key - will give result as {1 dev, 2 ash, 3 user}
+		// if tree map declared as TreeMap<Integer,String> tree=new TreeMap<>(Collections.reverseOrder());
+		//output will be {3 user,2 ash,1 dev}
+		
 		//put
 		//putIfAbsent
 		//get
@@ -145,6 +151,43 @@ public class Mapconcepts {
 		tree1.put(2,"aab");
 		tree1.put(3, "aac");
 		System.out.println(tree1); //{3=aac, 2=aab, 1=aaa}
+		
+		//firstuniquecharacter();
+		findsecondlargestfrequency();
+	}
+	// programs in map
+	public static void firstuniquecharacter() {
+		Map<Character,Integer> b=new LinkedHashMap<>();
+        String a="automation";
+		for(char c:a.toCharArray()){
+            b.put(c,b.getOrDefault(c,0)+1);
+        }
+        for(Map.Entry<Character,Integer> e:b.entrySet()){
+            if(e.getValue()==1){
+                System.out.println(e.getKey());
+                break;
+            }
+        }
+        System.out.println(b);
+	}
+	public static void findsecondlargestfrequency() {
+		Map<Character,Integer> b=new LinkedHashMap<>();
+        String a="aaabbbbcc";
+		for(char c:a.toCharArray()){
+            b.put(c,b.getOrDefault(c,0)+1);
+        }
+		
+		//sorting without streams
+        /*List<Map.Entry<Character,Integer>> k=new ArrayList<>(b.entrySet());
+        k.sort(Map.Entry.comparingByValue());
+        System.out.println(k);
+        System.out.println(k.get(1));*/
+		
+		//sorting using streams
+		Map<Character,Integer> c=
+		//b.entrySet().stream().sorted(Map.Entry.<Character,Integer>comparingByValue().reversed()).collect(Collectors.toMap(e->e.getKey(),e->e.getValue(),(x,y)->x,LinkedHashMap::new));
+		b.entrySet().stream().sorted(Map.Entry.comparingByValue()).collect(Collectors.toMap(e->e.getKey(),e->e.getValue(),(x,y)->x,LinkedHashMap::new));
+		System.out.println(c);
 	}
 }
 class Comparatorexample implements Comparator
