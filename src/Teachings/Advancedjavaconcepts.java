@@ -16,7 +16,7 @@ public class Advancedjavaconcepts {
 	public static void countcharacters() {
 		String a="automation";
 		Map<Character,Long> temp=a.chars()  // convert to unicode value of characters
-				.mapToObj(c->(char)c)       //typecast to characters
+				.mapToObj(c->(char)c)       // will convert primitive to object - here char to Character
 				.collect(Collectors.groupingBy(Function.identity(),Collectors.counting())); //function.identify will be same as c->c which gives same element
 		temp.forEach((k,v)->{
 			System.out.println(k+" "+v);
@@ -27,18 +27,23 @@ public class Advancedjavaconcepts {
 		Map<String,Long> temp=Arrays.stream(word.split(" "))
 				.collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
 		temp.forEach((k,v)->{
-			System.out.println(k+" "+v);
+			System.out.println(k+" "+v);  //a 1 java 2 ocean 2 now 1 is 1
 		});
 	}
 	public static void duplicateelementdisplay() {
 		List<Integer> a=Arrays.asList(1,2,3,4,5,1,2,3,6,7,8);
 		Set<Integer>b = new HashSet<>();
-		a.stream().filter(n->!b.add(n)).forEach(System.out::println);
+		a.stream().filter(n->!b.add(n)).forEach(System.out::println);  // 1 2 3
+	}
+	public static void primitiveduplicate() {
+		int a[]= {1,2,3,4,5,5,4,3};
+		Set<Integer> data=new HashSet<>();
+		Arrays.stream(a).filter(n->!data.add(n)).forEach(System.out::println); //5 4 3
 	}
 	public static void uniqueelementdisplay() {
 		List<Integer> a=Arrays.asList(1,2,3,4,5,1,2,3,6,7,8);
 		Set<Integer>b = new HashSet<>();
-		a.stream().filter(n->b.add(n)).forEach(System.out::println);
+		a.stream().filter(n->b.add(n)).forEach(System.out::println); //1 2 3 4 5 6 7 8
 		// a.stream().distinct().forEach(System.out::println);
 	}
 	public static void firstnonrepeatingcharacter() {
@@ -165,6 +170,7 @@ public class Advancedjavaconcepts {
 		//countcharacters();
 		//countwords();
 		//duplicateelementdisplay();
+		primitiveduplicate();
 		//uniqueelementdisplay();
 		//firstnonrepeatingcharacter();
 		//reducesum();
@@ -185,7 +191,7 @@ public class Advancedjavaconcepts {
 		//collectconcept();
 		//collectconcept1();
 		//collectconcept2();
-		collectconcept3();
+		//collectconcept3();
 	}
 
 }
@@ -208,3 +214,26 @@ class Employee{
 		return this.department;
 	}
 }
+
+
+
+/*Find duplicate elements.
+Find first non-repeated character.
+Find second highest salary.
+Group employees by department.
+Partition odd and even numbers.
+Count character frequency.
+Remove duplicate strings.
+Convert list to map.
+Sort employees by salary.
+Find the longest string.
+Merge two lists.
+Flatten nested lists.
+Count word occurrences.
+Find common elements between two lists.
+Convert list of names to uppercase.
+Group strings by length.
+Find the highest-paid employee in each department.
+Find missing numbers.
+Separate positive and negative numbers.
+Group numbers by their absolute value (similar to the example you asked earlier).*/
