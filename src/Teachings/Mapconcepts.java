@@ -146,14 +146,15 @@ public class Mapconcepts {
 		//System.out.println(tree.headMap(2));//1=ash
 		//System.out.println(tree.tailMap(2));//{2=dev, 3=user}
 		//System.out.println(tree.subMap(1,3));//{1=ash,2=dev}
-		TreeMap<Integer,String> tree1=new TreeMap<>(new Comparatorexample());
+		/*TreeMap<Integer,String> tree1=new TreeMap<>(new Comparatorexample());
 		tree1.put(1,"aaa");
 		tree1.put(2,"aab");
 		tree1.put(3, "aac");
-		System.out.println(tree1); //{3=aac, 2=aab, 1=aaa}
+		System.out.println(tree1); //{3=aac, 2=aab, 1=aaa}*/
 		
 		//firstuniquecharacter();
-		findsecondlargestfrequency();
+		//findsecondlargestfrequency();
+		System.out.println(longestCommonPrefix(new String[] {"as","ashs","ash"}));
 	}
 	// programs in map
 	public static void firstuniquecharacter() {
@@ -189,6 +190,23 @@ public class Mapconcepts {
 		b.entrySet().stream().sorted(Map.Entry.comparingByValue()).collect(Collectors.toMap(e->e.getKey(),e->e.getValue(),(x,y)->x,LinkedHashMap::new));
 		System.out.println(c);
 	}
+	public static String longestCommonPrefix(String[] strs) {
+        TreeMap<Integer,List<String>> storage=new TreeMap<>();
+        for(String a:strs){
+            storage.computeIfAbsent(a.length(),k-> new ArrayList<>()).add(a);
+        }
+        String first=storage.firstEntry().getValue().get(0);
+        List<String> last1 = storage.lastEntry().getValue();
+        String last=last1.get(last1.size()-1);
+        StringBuilder result=new StringBuilder();
+        for(int i=0;i<Math.min(first.length(),last.length());i++){
+            if(first.charAt(i)!=last.charAt(i)){
+                return result.toString();
+            }
+            result.append(first.charAt(i));
+        }
+        return result.toString();
+    }
 }
 class Comparatorexample implements Comparator
 {

@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -20,46 +21,35 @@ import java.util.LinkedHashMap;
 public class General{
 	public static void main(String args[]) throws IOException {
 		General g=new General();
-		g.secondsmallnumber(); //asked on Strategic interview
+		//g.secondsmallnumber(); //asked on Strategic interview
 		//g.stringindexrotate();
 		//g.stringregularexp();
 		//g.samenumbergrouping();
 		//g.leaderinarray();
 		//g.countcharactersinfile();
 		//g.paircheck();
-		//g.Stringlowercaseconversion();
 		//g.middleindexsum();
 		//g.missingnumbercheck();
 		//g.printingtree();
 		//g.arraylistduplicate();
 		//g.ibmquestion();
 		//g.sorttechnique1();
-		//g.timeconversion();
-		//g.firstnonrepeatingcharacter();
 		//g.duplicateinname();
 		//g.maxrepeatnumber();
 		//g.noofrotations_insortedarray();
 		//g.pairscount();
 		//g.arrivaldeparture();
-		//g.reversewordinsentence();
 		//g.movezerostoend();
 		//g.reversearray();
-		//g.Deloitteprogram();
-		//g.wordcomparison();
+		g.wordcomparison();
 		//g.streamusage();
 		//g.reverseonlystring()
-		//g.slidingwindowmax();
-		//g.numbercount();
 		//g.squarerootcheck();
 		//System.out.println(g.longestpalindrome());
-		//g.zigzagprintleetcode();
-		//g.twodimensionarraywork();
 		//g.maxsubarraysum();
-		//System.out.println(g.longestCommonPrefix(new String[] {"ash","ashs","as"}));
 		//g.backtrackingletters("23");
 		//g.backtracking2();
-		//g.tcsinterviewprogram();
-		g.tcsprogram3();
+		//g.consecutivenumberdisplay();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -189,42 +179,17 @@ public class General{
 	public void paircheck() {
 		int a[]= {1,5,7,-1,5};
 		int result = 6;
-		List<Integer> temp;
-		List<List<Integer>> res=new ArrayList<>();
-		for(int i=0;i<a.length;i++) {
-			for(int j=0;j<a.length;j++) {
-				if(a[i]+a[j]==result) {
-					int first= a[i];
-					int second = a[j];
-					temp= new ArrayList<>(Arrays.asList(first,second));
-				if(!res.contains(temp)) {
-					res.add(temp);
-				}
+		Set<Integer> seen=new HashSet<>();
+		Map<Integer,Integer> data=new HashMap<>();
+		for(int c:a) {
+			int compliment= result-c;
+			if(seen.contains(compliment)) {
+				data.put(c,compliment);
 			}
+			seen.add(c);
 		}
-		}
-		for(List<Integer> check:res) {
-			System.out.println(check);
-		}
-		
+		System.out.println(data);
 }
-	public void Stringlowercaseconversion() {
-		String a=" aswin oo ";
-		String d=a.trim();
-		System.out.println(d); // will trim white spaces at start and end only / op aswin oo
-		System.out.println(a.replaceAll("\\s+","")); // this regular expression removes white spaces in all places(aswinoo)
-		char b[]=a.toCharArray();
-		char c[]=new char[b.length];
-		for(int i=0;i<b.length;i++) {
-			if(b[i]>='A' && b[i]<='Z') {
-				c[i]=(char)(b[i]+32);
-			}
-			else if(b[i]>='a' && b[i]<='z') {
-				c[i]=(char)(b[i]-32);
-			}
-		}
-		System.out.println(Arrays.toString(c));
-	}
 	public void middleindexsum() {
 		int a[]= {1,7,3,6,5,6};
 		int lsum=0;
@@ -357,53 +322,8 @@ public class General{
         }
 		System.out.println(Arrays.toString(s));
 	}
-	public void timeconversion() {
-		String a="12:21:04AM";
-		String b[]=a.split(":");
-		System.out.println(Arrays.toString(b)); //[12,21,04AM]
-		String c=b[b.length-1].substring(2); //gives AM
-		System.out.println(c);
-		int d=0;
-		String e="";
-		if(c.equals("PM")) {
-			if(b[0].equals("12")) {
-				b[0]="12";
-			}
-			else {
-				d=Integer.parseInt(b[0]);
-				d+=12;
-				b[0]=String.valueOf(d);
-			}
-		}
-		else {
-			if(b[0].equals("12")) {
-				b[0]="00";
-			}
-		}
-		//b[b.length-1]=c;
-		for(int i=0;i<b.length;i++) {
-			e+=b[i]+":";
-		}
-		System.out.println(e.substring(0,8)); //00:21:04
-	}
-	public void firstnonrepeatingcharacter() {
-		String a="aaabbbcddef";
-		char b[]=a.toCharArray();
-		Map<Character,Integer> c=new HashMap<>();
-		
-		for(char ch:b) {
-			if(c.get(ch)==null) //i tried adding 1 to null- getting null pointer exception
-				c.put(ch,1);
-			else
-			c.put(ch,c.get(ch)+1);
-		}
-		Set<Character> s=c.keySet();
-		for(char d:s) {
-			if(c.get(d)==1) {
-				System.out.println("first non repeating character"+d);
-			}
-		}
-		}
+	
+	
 	public void duplicateinname() {
 		String s="aaabbbcd";
 		char b[]=s.toCharArray();
@@ -511,40 +431,6 @@ public class General{
 		}
 		System.out.println("maxplatform needed is "+maxplatform);
 	}
-	public String reverseword(String a) {
-		char b[]=a.toCharArray();
-		char c[]=new char[b.length];
-		String d="";
-		for(int i=0;i<b.length;i++) {
-			d+=b[a.length()-i-1];
-		}
-		return d;
-	}
-	public void reversewordinsentence() {
-		String a="HI how are you";
-		String b[]=a.split(" ");
-		String d[]=new String[b.length];
-		int count=0;
-		for(String c:b) {
-			d[count++]=reverseword(c);
-		}
-		System.out.println(Arrays.toString(d));
-	}
-	public void maxrepeatnumberv2() {
-		String s="assssvvvvv";
-		Map<Character,Integer> check=new HashMap<Character,Integer>();
-		for(int i=0;i<s.length();i++){
-			if(!check.containsKey(s.charAt(i))){
-				check.put(s.charAt(i),1);
-				}
-			else{
-				check.put(s.charAt(i),check.get(s.charAt(i))+1);
-				}
-			}
-		for(Map.Entry k:check.entrySet()){
-			System.out.println(k.getKey()+"  "+k.getValue());
-			}
-		}
 	public void countcharactersv3() {
 		String s="assssvvvvv";
 		Map<Character,Integer> check=new HashMap<Character,Integer>();
@@ -615,40 +501,7 @@ public class General{
 	public static String append(String a){
         return a+="ay";
     }
-	public static void Deloitteprogram() {
-		//london ondonlay 
-		//my name is aswin devaraj - input
-		//myay ameay isay aswinay evarajday - output
-		// if vowel encountered - then we need to substring and add the first few characters at beginning and append ay at end
-		
-		String userinput="my name is aswin devaraj";
-        String data[]=userinput.split(" ");
-        for(String s:data){
-            //checkwords(s); 
-            //append(s);
-        	checkwords2(s);
-        }
-	}
-	public static void checkwords2(String a) {
-		int i=0;
-		String temp="";
-		boolean flag=false;
-		for(i=0;i<a.length();i++) {
-			if("aeiou".indexOf(a.charAt(i))!=-1) {
-				temp=a.substring(i);
-				flag=true;
-				break;
-			}
-		}
-		if(flag==false) {
-			temp=a+"ay";
-		}
-		else {
-			temp+=a.substring(0,i);
-			temp+="ay";
-		}
-		System.out.println(temp);
-	}
+	
 	public static void wordcomparison() {
 		String a="Java java program";
 		String b[]=a.split(" ");
@@ -690,40 +543,6 @@ public class General{
 		}
 		System.out.println(new String(b));
 		}
-	public static void slidingwindowmax() {
-		String a="abcabcdabc";
-		int left=0;
-		int maxlength=0;
-		int start=0;
-		Map<Character,Integer> v=new HashMap<Character,Integer>();
-		for(int right=0;right<a.length();right++) {
-			if(v.containsKey(a.charAt(right))) {
-				left=Math.max(left,(v.get(a.charAt(right))+1));
-			}
-			v.put(a.charAt(right),right);
-			if(right-left+1>maxlength) {
-				maxlength=right-left+1;
-				start=left;
-			}
-		}
-		System.out.println("length of longest substring"+maxlength);
-		System.out.println(a.substring(start,start+maxlength));
-		System.out.println(v);
-	}
-	public void numbercount() {
-		String a="1112223334";
-		int n=Integer.parseInt(a);
-		int freq[]=new int[10];
-		while(n>0) {
-			freq[n%10]++;
-			n=n/10;
-		}
-		for(int i=0;i<freq.length;i++) {
-			if(freq[i]!=0) {
-				System.out.println(i+" repeated "+freq[i]+" times");
-			}
-		}
-	}
 	public void squarerootcheck() {
 		int n=36;
 		int length=n/2;
@@ -767,60 +586,6 @@ public class General{
 		}
 		return true;
 	}
-	public void zigzagprintleetcode() {
-		/*Input: s = "PAYPALISHIRING", numRows = 4
-		Output: "PINALSIGYAHRPI"
-		Explanation:
-		P     I    N
-		A   L S  I G
-		Y A   H R
-		P     I*/
-		String s="abcdefghi";
-		int numRows=4;
-        List<Character> rows[]=new ArrayList[numRows];
-        for(int i=0;i<numRows;i++){
-            rows[i]=new ArrayList<>();
-        }
-        int idx=0;
-        int d=1;
-        for(char c:s.toCharArray()){
-            rows[idx].add(c);
-            if(idx==0)
-            d=1;
-            else if(idx==numRows-1)
-            d=-1;
-            idx+=d;
-        }
-        StringBuilder k=new StringBuilder();
-        for(List<Character> v:rows){
-            for(char e:v){
-                k.append(e);
-            }
-        }
-        System.out.println(k.toString());
-	}
-	public void twodimensionarraywork() {
-		String data[][]= {{"ash","Dev","lias"},{"lia","data","homei"}};
-		Map <Integer,List<String>> r=new HashMap<>();
-		/*for(String temp[]:data) {
-			for(String temp2:temp) {
-				r.computeIfAbsent(temp2.length(),k->new ArrayList()).add(temp2);
-			}
-		}*/
-		//below and above are same codes
-		for(String temp[]:data) {
-			for(String temp2:temp) {
-				if(!r.containsKey(temp2.length())) {
-					r.put(temp2.length(),new ArrayList());
-				}
-				r.get(temp2.length()).add(temp2);
-			}
-		}
-		
-		r.forEach((k,v)->{
-			System.out.println(k+" "+v);
-		});
-	}
 	public void maxsubarraysum() {
 		// kadene algorithm - if currentsum goes negative reset to 0 as it will further reduce future sum
 		int a[]= {-2,1,-3,4,-1,2,1,-5,4};
@@ -846,23 +611,7 @@ public class General{
 			System.out.println(a[i]);
 		}
 	}
-	public static String longestCommonPrefix(String[] strs) {
-        TreeMap<Integer,List<String>> storage=new TreeMap<>();
-        for(String a:strs){
-            storage.computeIfAbsent(a.length(),k-> new ArrayList<>()).add(a);
-        }
-        String first=storage.firstEntry().getValue().get(0);
-        List<String> last1 = storage.lastEntry().getValue();
-        String last=last1.get(last1.size()-1);
-        StringBuilder result=new StringBuilder();
-        for(int i=0;i<Math.min(first.length(),last.length());i++){
-            if(first.charAt(i)!=last.charAt(i)){
-                return result.toString();
-            }
-            result.append(first.charAt(i));
-        }
-        return result.toString();
-    }
+	
 	public static void backtrackingletters(String digits) {
         List<String> res=new ArrayList<>();
         if(digits==null || digits.length()==0)
@@ -908,40 +657,28 @@ public class General{
 			coms.deleteCharAt(coms.length()-1);
 		}
 	}
-	public static void tcsinterviewprogram() {
-		// count frequency and print them in descending order
-		String a="aswindevarajan";
-		Map<Character,Integer> data=new HashMap<>();
-		for(int i=0;i<a.length();i++) {
-			data.put(a.charAt(i),data.getOrDefault(a.charAt(i),0)+1);
+	public static void consecutivenumberdisplay() {
+		int a[]= {1,2,4,3,5,6,0,8,7};
+		//find small
+		int small=a[0];
+		for(int i=0;i<a.length;i++) {
+			if(a[i]<small) {
+				small=a[i];
+			}
 		}
-		//convert map to list to get sorted functionality
-		List<Map.Entry<Character,Integer>> list=new ArrayList<>(data.entrySet());
-		list.sort((c,d)->d.getValue()-c.getValue());
-		for(Map.Entry<Character,Integer> l:list) {
-			//System.out.println(l.getKey()+" "+l.getValue());
-			tcsprogram2(l.getValue(),l.getKey());
+		List<Integer> data=new ArrayList<>(Arrays.asList(1,2,4,3,5,6,0,8,7));
+		List<Integer> result=new ArrayList<>();
+		int count=0;
+		while(count<a.length) {
+			if(data.contains(small)) {
+				result.add(small);
+				small++;
+				count++;
+			}
+			else {
+				break;
+			}
 		}
-		
-	}
-	public static void tcsprogram2(int n,Character v) {
-		for(int i=0;i<n;i++) {
-			System.out.print(v);
-		}
-	}
-	public static void tcsprogram3() {
-		//above tcs program1 defined using streams here
-		String b="aaabbbbcc";
-        Map<Character,Integer> data=new HashMap<>();
-        for(char a:b.toCharArray()){
-            data.put(a,data.getOrDefault(a,0)+1);
-        }
-        Map<Character,Integer> data1=data.entrySet().stream().sorted(Map.Entry.<Character,Integer>comparingByValue().reversed()).collect(Collectors.toMap(e->e.getKey(),e->e.getValue(),(x,y)->x,LinkedHashMap::new));
-        
-        for(Map.Entry<Character,Integer>data3:data1.entrySet()){
-            for(int i=0;i<data3.getValue();i++){
-                System.out.print(data3.getKey());  //bbbbaaacc
-            }
-        }
+		System.out.println(result);
 	}
 }

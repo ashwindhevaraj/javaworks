@@ -1,7 +1,9 @@
 package Teachings;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -10,9 +12,20 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Advancedjavaconcepts {
+	public static void displayhighfrequencyelements() {
+		String a="applee";
+		Map<Character,Integer> data=new HashMap<>();
+		for(char b:a.toCharArray()) {
+			data.put(b,data.getOrDefault(b,0)+1);
+		}
+		int maxfrequency=data.values().stream().max(Integer::compareTo).orElse(0);  //2
+		//int maxfrequency=data.values().stream().max((c,d)->c.compareTo(d)).orElse(0); this also works
+		data.entrySet().stream().filter(e->e.getValue()==maxfrequency).forEach(System.out::println);//p=2,e=2
+	}
 	public static void countcharacters() {
 		String a="automation";
 		Map<Character,Long> temp=a.chars()  // convert to unicode value of characters
@@ -46,6 +59,14 @@ public class Advancedjavaconcepts {
 		a.stream().filter(n->b.add(n)).forEach(System.out::println); //1 2 3 4 5 6 7 8
 		// a.stream().distinct().forEach(System.out::println);
 	}
+	public static void maxelementdisplayprimitive() {
+		int a[]={1,1,2,3,4,5};
+	       Map<Integer,Long> data=
+	       Arrays.stream(a).boxed().collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+	       long max=data.values().stream().mapToLong(Long::longValue).max().orElse(0);
+	       data.entrySet().stream().filter(e->e.getValue()==max).forEach(System.out::println);
+	       //output 1=2
+	}
 	public static void firstnonrepeatingcharacter() {
 		String a="automation";
 		Character result=a.chars()
@@ -59,6 +80,34 @@ public class Advancedjavaconcepts {
 				.orElse(null);
 		System.out.println(result);
 	}
+	public static void firstnonrepeat2() {
+		String a="aaabbbccd";
+        a.chars().mapToObj(c->(char)c)
+        .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+        .entrySet().stream().filter(e->e.getValue()==1)
+        .map(Map.Entry::getKey).forEach(System.out::println); // d
+	}
+	public static void stringduplication() {
+		String a="aaabbbcccd";
+        Set<Character> b=a.chars()
+        .mapToObj(c->(char)c)
+        .collect(Collectors.groupingBy(
+            Function.identity(),Collectors.counting()))
+        .entrySet()
+        .stream()
+        .filter(e->e.getValue()<2)
+        .map(Map.Entry::getKey)
+        .collect(Collectors.toSet());
+        System.out.println(b);      // d as answer
+	}
+	public static void compressionprogram() {
+		String a="aaabbcc";
+        Map<Character,Integer> data=new LinkedHashMap<>();
+        for(char b:a.toCharArray()){
+            data.put(b,data.getOrDefault(b,0)+1);
+        }
+        data.entrySet().stream().forEach(d->System.out.print(d.getKey()+""+d.getValue())); //a3b2c2
+    }
 	public static void reducesum() {
 		List<Integer> a=Arrays.asList(1,2,3,4,5);
 		int sum=a.stream().reduce(0,Integer::sum);
@@ -166,11 +215,51 @@ public class Advancedjavaconcepts {
 			});
 		});
 	}
+	public static void uppercaseinstream() {
+		char a[]= {'a','s','w','i','n'};
+		char b[]=IntStream.range(0, a.length).mapToObj(x->Character.toUpperCase(a[x]))
+				.collect(StringBuilder::new,StringBuilder::append,StringBuilder::append).toString().toCharArray();
+		//collect is three parameter function- parameter 1 supplier- StringBuilder::new
+		                                       //parameter 2 accumulator - StringBuilder::append- appends each character
+		                                        //parameter 3 combiner - combines StringBuilders
+		System.out.println(b);   //ASWIN
+	}
+	public static void uppercaseinstream2() {
+		//remove spaces and convert to uppercase
+		String a=" aswin oo i";
+		char b[]=a.toCharArray();
+		IntStream.range(0, b.length)
+		.filter(x->b[x]!=' ').mapToObj(x->Character.toUpperCase(b[x])).forEach(System.out::println);
+		//ASWINOOI
+	}
+	public static void convertinttoarraylist() {
+		int a[]= {0,1,2,3,4,5,6};
+		ArrayList<Integer> data=Arrays.stream(a).boxed().collect(Collectors.toCollection(ArrayList::new));
+		System.out.println(data);
+	}
+	public static void displayfrequencyindescending() {
+		//above tcs program1 defined using streams here
+		String b="aaabbbbcc";
+        Map<Character,Integer> data=new HashMap<>();
+        for(char a:b.toCharArray()){
+            data.put(a,data.getOrDefault(a,0)+1);
+        }
+        Map<Character,Integer> data1=data.entrySet()
+        		.stream()
+        		.sorted(Map.Entry.<Character,Integer>comparingByValue().reversed())
+        		.collect(Collectors.toMap(e->e.getKey(),e->e.getValue(),(x,y)->x,LinkedHashMap::new));
+        
+        for(Map.Entry<Character,Integer>data3:data1.entrySet()){
+            for(int i=0;i<data3.getValue();i++){
+                System.out.print(data3.getKey());  //bbbbaaacc
+            }
+        }
+	}
 	public static void main(String args[]) {
 		//countcharacters();
 		//countwords();
 		//duplicateelementdisplay();
-		primitiveduplicate();
+		//primitiveduplicate();
 		//uniqueelementdisplay();
 		//firstnonrepeatingcharacter();
 		//reducesum();
@@ -192,6 +281,13 @@ public class Advancedjavaconcepts {
 		//collectconcept1();
 		//collectconcept2();
 		//collectconcept3();
+		//uppercaseinstream();
+		//uppercaseinstream2();
+		//stringduplication();
+		//maxelementdisplayprimitive();
+		//displayhighfrequencyelements();
+		//compressionprogram();
+		convertinttoarraylist();
 	}
 
 }
