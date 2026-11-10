@@ -3,6 +3,7 @@ package Teachings;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,12 @@ public class Stringconcepts {
         result.append(c);                      dcba1234
         result.append(new StringBuffer(a.substring(first)).reverse()); dcba1234gfed
         System.out.println(result); another logic*/
+	public static void regularexpression1() {
+		// replace all alphanumeric letters from the string
+		String a="Hell@123#fgghj";
+		String b=a.replaceAll("[^a-zA-Z0-9]","");
+		System.out.println(b);   //Hell123fgghj
+	}
 	public static String reverses(String a) {
 		String temp="";
 		for(int i=a.length()-1;i>=0;i--) {
@@ -271,6 +278,23 @@ public class Stringconcepts {
 		System.out.println(a.substring(start,start+maxlength));  // output abcd
 		System.out.println(v);
 	}
+	public static void slidingwindoweasy() {
+		String a="abcabcabcbbabcdebb";
+		int left=0;
+		int start=0;
+		int max=0;
+		Set<Character> data=new HashSet<>();
+		for(int right=0;right<a.length();right++) {
+			while(!data.add(a.charAt(right)))
+				data.remove(a.charAt(left++)); //removes duplicate from the front to the location
+			if(right-left+1>max) {
+				max=right-left+1;
+				start=left;
+			}
+		}
+		System.out.println("Max length "+max);
+		System.out.println("longest non repeating word "+a.substring(start,start+max));
+		}
 	public static void countingnumbers() {
 		String a="001123333321156";
 		int freq[]=new int[10];
@@ -356,6 +380,27 @@ public class Stringconcepts {
 		}
 		System.out.println("Anagram exists");
 	}
+	public static void commonprefix() {
+		String res[]= {"flow","flw","flo"};
+		String prefix=res[0];
+		for(int i=1;i<res.length;i++) {
+			while(!res[i].startsWith(prefix)) {
+				prefix=prefix.substring(0,prefix.length()-1);
+				if(prefix.length()==0) {
+					System.out.println("No prefix found");
+					break;
+				}
+			}
+		}
+		System.out.println(prefix); //fl
+	}
+	public static void titlecaseprint() {
+		String a="java is a fun language";
+		String b[]=a.split(" ");
+		for(String c:b) {
+			System.out.println(c.substring(0,1).toUpperCase()+c.substring(1));
+		}
+	}
 	public static void main(String args[]) {
 		//stringreversewithnumber();
 		//splitdelimiters();
@@ -373,7 +418,11 @@ public class Stringconcepts {
 		//countingnumbers();
 		//zigzagprint();
 		//duplicatewordremoval();
-		anagramcheck();
+		//anagramcheck();
+		//commonprefix();
+		//slidingwindoweasy();
+		//regularexpression1();
+		titlecaseprint();
 	}
 
 }

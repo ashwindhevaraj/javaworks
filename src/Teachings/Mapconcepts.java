@@ -155,6 +155,7 @@ public class Mapconcepts {
 		//firstuniquecharacter();
 		//findsecondlargestfrequency();
 		System.out.println(longestCommonPrefix(new String[] {"as","ashs","ash"}));
+		sortcharacterbyfrequency();
 	}
 	// programs in map
 	public static void firstuniquecharacter() {
@@ -207,6 +208,20 @@ public class Mapconcepts {
         }
         return result.toString();
     }
+	public static void sortcharacterbyfrequency() {
+		String a="aabbbbbbbcccccddd";
+		Map<Character,Integer> data=new HashMap<>();
+		for(char b:a.toCharArray()) {
+			data.put(b, data.getOrDefault(b,0)+1);
+		}
+		List<Character> data1=new ArrayList<>(data.keySet());
+		data1.sort((c,d)->data.get(d)-data.get(c));
+		StringBuilder br=new StringBuilder();
+		for(char e:data1) {
+			br.append(String.valueOf(e).repeat(data.get(e)));
+		}
+		System.out.println(br.toString());
+	}
 }
 class Comparatorexample implements Comparator
 {

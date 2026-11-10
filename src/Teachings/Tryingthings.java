@@ -38,7 +38,8 @@ public class Tryingthings {
 		for(Entry<String, Report> entry:li) {
 			System.out.printf("%-15s %-15s %-15s %-15s%n",entry.getKey(),entry.getValue().attempt,entry.getValue().status2,entry.getValue().flaky);
 		}*/
-		checkformap();
+		//checkformap();
+		checkprogram1();
 		}
 	public static void checkformap() {
 		String results[][]= {
@@ -80,6 +81,49 @@ public class Tryingthings {
 			System.out.printf("%-15s %-15s %-15s %-15s%n",testname,attempts,status,flaky);
 		}
 	}
+	public static void checkprogram1() {
+		String results[][]= {
+				{"checkout_test","attempt-1","FAIL"},
+				{"checkout_test","attempt-2","PASS"},
+				{"login_test","attempt-1","PASS"},
+				{"search_test","attempt-1","FAIL"},
+				{"search_test","attempt-2","FAIL"},
+				{"profile_test","attempt-1","PASS"},
+				{"profile_test","attempt-2","FAIL"},
+				{"cart_test","attempt-1","SKIP"},
+		};
+		Map<String,Reporttoday> data=new HashMap<>();
+		for(String a[]:results) {
+			Reporttoday k;
+			if(!data.containsKey(a[0])) {
+				k=new Reporttoday(a[0],a[1],a[2]);
+				data.put(a[0], k);
+			}
+			else {
+				k=data.get(a[0]);
+				k.attempt++;
+				if(k.status=="FAIL" && a[2]=="PASS") {
+					k.flaky=true;
+				}
+				else if(k.status=="PASS" && a[2]=="FAIL") {
+					k.flaky=true;
+				}
+				else {
+					k.flaky=false;
+				}
+				k.status=a[2];
+			}
+		}
+		System.out.printf("%-15s %-15s %-15s %-15s%n","testname","attempts","status","flaky");
+		data.values().stream().sorted((a,b)->b.attempt-a.attempt).forEach((v)->{
+			System.out.printf("%-15s %-15s %-15s %-15s %n",v.reportname,v.attempt,v.status,v.flaky);
+		});
+		/*for(Map.Entry<String,Reporttoday> data1:data.entrySet()) {
+			Reporttoday v=data1.getValue();
+			System.out.printf("%-15s %-15s %-15s %-15s%n",v.reportname,v.attempt,v.status,v.flaky);
+		}*/
+		
+	}
 }
 	
 class Report{
@@ -93,3 +137,15 @@ class Report{
 		this.attempt=1;
 	}
 }
+
+class Reporttoday{
+	public String reportname;
+	public int attempt;
+	public String status;
+	public boolean flaky=false;
+	Reporttoday(String a,String b,String c){
+		this.reportname=a;
+		this.attempt++;
+		this.status=c;
+		}
+	}
