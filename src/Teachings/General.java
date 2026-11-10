@@ -41,7 +41,7 @@ public class General{
 		//g.arrivaldeparture();
 		//g.movezerostoend();
 		//g.reversearray();
-		g.wordcomparison();
+		//g.wordcomparison();
 		//g.streamusage();
 		//g.reverseonlystring()
 		//g.squarerootcheck();
@@ -50,6 +50,11 @@ public class General{
 		//g.backtrackingletters("23");
 		//g.backtracking2();
 		//g.consecutivenumberdisplay();
+		//g.missingnumberinarray();
+		//g.integertoromancheck();
+		//g.binarysearch();
+		//g.printdigittwice();
+		g.squarerootcheck2();
 		/*char a='\u0061'; //internally hexa will be converted to 97 and slash u is to denote unicode
 		int b=0b1111; //binary representation
 		int c=01111; //octal representation
@@ -562,6 +567,16 @@ public class General{
 		else
 			System.out.println("Not a perfect square");
 	}
+	public void squarerootcheck2() {
+		int n=49;
+		int k=(int)Math.sqrt(n);
+		if(k*k==n) {
+			System.out.println(n+" is a square root number");
+		}
+		else {
+			System.out.println(n+" is not a square root number");
+		}
+	}
 	public String longestpalindrome() {
 		String s="radam";
 		for(int lengths=s.length();lengths>0;lengths--) {
@@ -680,5 +695,75 @@ public class General{
 			}
 		}
 		System.out.println(result);
+	}
+	public static void missingnumberinarray() {
+		int a[]= {1,2,3,4,5,7};
+		int n=a.length;
+		int max=a[n-1];
+		int sum=max*(max+1)/2;
+		for(int b:a) {
+			sum-=b;
+		}
+		System.out.println("Missing no is "+sum);
+	}
+	public static void integertoromancheck() {
+		StringBuilder result=new StringBuilder();
+		int value=1994;
+		String symbols[]= {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+		int values[]= {1000,900,500,400,100,90,50,40,10,9,5,4,1};
+		for(int i=0;i<values.length;i++) {
+			while(value>=values[i]) {
+				result.append(symbols[i]);
+				value-=values[i];
+			}
+		}
+		System.out.println(result);
+	}
+	public static void binarysearch() {
+		int result=5;
+		int a[]= {1,3,5,7,9};
+		int left=0;
+		int right=a.length-1;
+		while(left<right) {
+			int mid=left+(right-left)/2;
+			if(a[mid]==result) {
+				System.out.println("Found "+a[mid]+" at pos "+mid);
+				break;
+			}
+			else if(a[mid]>result) {
+				right=mid-1;
+			}
+			else {
+				left=mid+1;
+			}
+		}
+		System.out.println("Default -if this printed alone- then search is unsuccessful");
+	}
+	public static void printdigittwice() {
+		int a=12345;
+		int temp=0;
+		int temp1=0;
+		while(a>0) {
+			temp=a%10;
+			temp1=temp1*10+temp;
+			a=a/10;
+		} // reverse a number concept
+		String b=String.valueOf(temp1);
+		for(char c:b.toCharArray()) {
+			System.out.print(String.valueOf(c).repeat(2));
+		}
+	}
+	public static void IDFCprogram() {
+		String results[][]= {
+				{"checkout_test","attempt-1","FAIL"},
+				{"checkout_test","attempt-2","PASS"},
+				{"login_test","attempt-1","PASS"},
+				{"search_test","attempt-1","FAIL"},
+				{"search_test","attempt-2","FAIL"},
+				{"profile_test","attempt-1","PASS"},
+				{"profile_test","attempt-2","FAIL"},
+				{"cart_test","attempt-1","SKIP"},
+		};
+		
 	}
 }

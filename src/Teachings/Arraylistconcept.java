@@ -1,23 +1,25 @@
 package Teachings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
 public class Arraylistconcept {
 public static void main(String args[]) {
 	//1. initial creation
-	ArrayList<String> list = new ArrayList<>();
+	//ArrayList<String> list = new ArrayList<>();
 	
 	//2. from another list
 	//List<String> names = List.of("John", "Sam");
 	//ArrayList<String> list = new ArrayList<>(names);
 	
 	//3. add method
-	list.add("ash");
-	list.add("user");
+	//list.add("ash");
+	//list.add("user");
 	//System.out.println(list); [ash,user]
 	
 	//4. at index
@@ -25,12 +27,12 @@ public static void main(String args[]) {
 	//System.out.println(list);[ash,dev,user]
 	
 	//5. add all
-	List<String> list2 = List.of("cec","wife");
+	//List<String> list2 = List.of("cec","wife");
 	//list.addAll(list2);
 	//System.out.println(list);[ash,user,cec,wife]
 	
 	//6. at position
-	list.addAll(1,list2);
+	//list.addAll(1,list2);
 	//System.out.println(list);ash, cec, wife, user]
 	
 	//7 retrieval 
@@ -149,6 +151,12 @@ public static void main(String args[]) {
 	//Collections.swap(list,0,2);
 	//Collections.rotate(list,2);
 	
+	//Linkedlist- reverse the linked list
+	LinkedList<Integer> data=new LinkedList<>(Arrays.asList(5,4,3,2,1)); 
+	//Arrays.asList will give list as output- we need to pass into constructor here
+	for(int i=data.size()-1;i>=0;i--) {
+		System.out.print(data.get(i));
+	}
 	
 	
 }

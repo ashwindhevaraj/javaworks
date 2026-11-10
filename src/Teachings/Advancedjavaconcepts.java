@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -67,10 +70,20 @@ public class Advancedjavaconcepts {
 	       data.entrySet().stream().filter(e->e.getValue()==max).forEach(System.out::println);
 	       //output 1=2
 	}
+	public static void maxelementprimitive() {
+		int a[]= {1,2,3,4,5,6};
+		int maxs=Arrays.stream(a).max().orElse(0);
+		System.out.println(maxs);
+	}
+	public static void listmaxelement() {
+		List<Integer> data=Arrays.asList(1,2,3,4,5,6,7);
+		int maxs=data.stream().mapToInt(Integer::intValue).max().orElse(0);
+		System.out.println(maxs);
+	}
 	public static void firstnonrepeatingcharacter() {
 		String a="automation";
 		Character result=a.chars()
-				.mapToObj(c->(char)c)
+				.mapToObj(c->(char)c)	
 				.collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new,Collectors.counting()))
 				.entrySet()
 				.stream()
@@ -113,6 +126,11 @@ public class Advancedjavaconcepts {
 		int sum=a.stream().reduce(0,Integer::sum);
 		System.out.println(sum);
 	}
+	public static void primitivereduce() {
+		int a[]= {1,2,3,4,5};
+		int sum=Arrays.stream(a).reduce(0,(b,c)->b+c);
+		System.out.println(sum);
+		}
 	public static void reduceproduct() {
 		List<Integer> a=Arrays.asList(1,2,3,4,5);
 		int product = a.stream().reduce(1,(b,c)->b*c);
@@ -214,6 +232,14 @@ public class Advancedjavaconcepts {
 				System.out.println(e.getName());
 			});
 		});
+		
+		//another way to collect and print together
+		data.stream().collect(Collectors.groupingBy(e->e.getDepartment())).forEach((k,v)->{
+			System.out.println(k);
+			for(Employee r:v) {
+				System.out.println(r.getName()+" "+r.getId());
+			}
+		});
 	}
 	public static void uppercaseinstream() {
 		char a[]= {'a','s','w','i','n'};
@@ -263,6 +289,7 @@ public class Advancedjavaconcepts {
 		//uniqueelementdisplay();
 		//firstnonrepeatingcharacter();
 		//reducesum();
+		//primitivereduce();
 		//reduceproduct();
 		//reducemax();
 		//reducemin();
@@ -287,9 +314,25 @@ public class Advancedjavaconcepts {
 		//maxelementdisplayprimitive();
 		//displayhighfrequencyelements();
 		//compressionprogram();
-		convertinttoarraylist();
+		//convertinttoarraylist()
+		//maxelementprimitive();
+		listmaxelement();
+		/*Calculator c=(a,b)->a+b; //functional interface ->defined below and output is 40 here
+		System.out.println(c.add(10,30));
+		Predicate<Integer> d=n->n>10;
+		System.out.println(d.test(12));// returns true- Predicate is first subdivision of functional interface and returns boolean
+		Function<Integer,Integer> e=n->n*n;
+		System.out.println(e.apply(5));//return 25 -Function accepts input and returns output
+		Consumer<Integer> f=n->System.out.println(n);
+		f.accept(20);               //20,consumer has accept method which has void return type-it will compute and no output
+		Supplier<String> g=()->"Only constants";
+		System.out.println(g.get());*/ // only constants - supplier has get method which return what is defined
+		
 	}
 
+}
+interface Calculator{
+	public int add(int a,int b); //functional interface - it has one abstract method
 }
 class Employee{
 	private int id;
